@@ -12,11 +12,9 @@ async function visitWebsite() {
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
         '--disable-gpu',
-        '--single-process', // Optional, gunakan jika memory terbatas
       ],
-      executablePath: '/usr/bin/chromium-browser', // Path Chromium di Alpine
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium',
     });
-
     // Buka page baru
     const page = await browser.newPage();
 
