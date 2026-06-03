@@ -1,30 +1,16 @@
-# Menggunakan image Node.js dengan Debian (sudah include dependencies)
-FROM node:18-bullseye-slim
+# Gunakan image khusus untuk Puppeteer (sudah include semua dependencies)
+FROM mcr.microsoft.com/playwright/node:20-jammy
 
-# Install dependencies untuk Puppeteer
-RUN apt-get update && apt-get install -y \
-    chromium-browser \
-    ca-certificates \
-    fonts-noto \
-    libfreetype6 \
-    libharfbuzz0b \
-    wget \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set working directory
 WORKDIR /app
 
-# Copy package.json dan package-lock.json
+# Copy package.json
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy seluruh project
+# Copy project
 COPY . .
 
-# Expose port (jika diperlukan)
-EXPOSE 3000
-
-# Start aplikasi
+# Start bot
 CMD ["node", "bot.js"]
