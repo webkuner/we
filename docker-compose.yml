@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    environment:
+      - NODE_ENV=production
+    restart: always
+    volumes:
+      - ./screenshots:/app/screenshots
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
