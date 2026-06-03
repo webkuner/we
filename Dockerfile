@@ -1,15 +1,15 @@
-# Gunakan image khusus untuk Puppeteer (sudah include semua dependencies)
-FROM mcr.microsoft.com/playwright/node:20-jammy
+# Gunakan image Node.js resmi + install Puppeteer via npm
+FROM node:18-slim
 
 WORKDIR /app
 
-# Copy package.json
+# Copy package.json terlebih dahulu
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies (termasuk puppeteer)
 RUN npm install
 
-# Copy project
+# Copy seluruh project
 COPY . .
 
 # Start bot
